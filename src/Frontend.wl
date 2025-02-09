@@ -32,8 +32,10 @@ processRequest[globalControls_String, modals_String, messager_String, client_] :
         Return[];
     ];
 
+    Echo["Processing!"];
+
     With[{
-        inputCells = Select[notebookOnline["Cells"], nb`InputCellQ]
+        inputCells = Select[notebookOnline["Cells"], cell`InputCellQ]
     },
     
         (* If you don't want to handle Kernel requests and prepare the rest -> use Notebooks public API *)
