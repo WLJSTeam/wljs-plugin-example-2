@@ -1,23 +1,12 @@
-# WLJS Notebook Plugin Template
+# WLJS Notebook Plugin Example 2
+*Basic extension, which adds Evaluate All button to the top-bar, menu and command palette*
 
-A boilerplate for writting various plugins/extensions for WLJS Notebook
 
-Clone it to `<AppData>/wljs_packages/` folder and restart an app
 
-## Commands
+## How to install
+1. Clone this repository to `<AppData>/wljs_packages` or paste github url to the settings menu
+2. Restart WLJS App
 
-To bundle Javascript
 
-```bash
-npm i
-npm run build
-```
-
-To restore `.git` 
-
-```bash
-npm run restore
-```
-
-## Examples
-- [Integrating external JS library with Wolfram Kernel](https://github.com/JerryI/wljs-plugin-example-1)
+## Example
+Run in a new notebook

@@ -1,0 +1,34 @@
+Component[OptionsPattern[]] := With[{
+    messager = OptionValue["Messanger"], 
+    globalControls = OptionValue["Controls"], 
+    appEvents = OptionValue["AppEvent"], 
+    modals = OptionValue["Modals"],
+    UId = CreateUUID[],
+    listener = CreateUUID[],
+    processRequest = OptionValue["HandlerFunction"]
+},
+
+    EventHandler[listener, {
+        "Button" -> Function[Null,
+            processRequest[globalControls, modals, messager, Global`$Client (*`*)]
+        ]
+    }];
+
+    (*/* this uid will be shared with Electron's shortcuts, therefore we use a public Controls pool of events */*)
+    EventHandler[EventClone[globalControls], {
+        "example-eval-all" -> Function[Null, processRequest[globalControls, modals, messager, Global`$Client (*`*)]]
+    }];
+
+    {
+        <button title="Evaluate all" id="{UId}" class="win:ml-0 owin:ml-0 linux:ml-0 text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md w-6 h-6">
+            <svg class="w-5 h-5 mr-auto ml-auto" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" ><path d="M2.78 2L2 2.41v12l.78.42 9-6V8l-9-6zM3 13.48V3.35l7.6 5.07L3 13.48z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6 14.683l8.78-5.853V8L6 2.147V3.35l7.6 5.07L6 13.48v1.203z"/>
+            </svg>            
+        </button>  
+    ,
+        <WebUIEventListener Type={"click"} Id={UId} Pattern={"Button"} Event={listener} /> 
+    }
+]
+
+Options[Component] = {"Controls"->"", "AppEvent"->"", "Modals"->"", "HandlerFunction" -> Print}
+
+Component
